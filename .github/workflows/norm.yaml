@@ -1,0 +1,29 @@
+name: Norminette
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  norm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Norminette
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install norminette
+
+      - name: Run Norminette
+        run: |
+              if [ -d src ]; then
+                  norminette src
+              fi
+              if [ -d include ]; then
+                  norminette include
+              fi
+      - name: Check forbidden functions
+        run: |
+          if grep -R "printf" src; then exit 1; fi
