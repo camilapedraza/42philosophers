@@ -6,32 +6,28 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:15:14 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/09 15:49:29 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/10 21:00:35 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+long	to_usec(long time)
+{
+	return (time * 1000L);
+}
+
 long	get_time_ms(void)
 {
-	struct timeval time_now;
+	struct timeval	time_now;
+
 	gettimeofday(&time_now, NULL);
 	return (time_now.tv_sec * 1000L + time_now.tv_usec / 1000L);
 }
 
 long	timestamp_ms(t_sim *sim)
 {
-    return (get_time_ms() - sim->start_time);
-}
-
-void	print_status(t_philo *philosopher, const char *status)
-{
-	long	timestamp;
-	
-	pthread_mutex_lock(&philosopher->sim->print_mutex);
-	timestamp = timestamp_ms(philosopher->sim);
-	printf("%ld %d %s.\n", timestamp, philosopher->id, status);
-	pthread_mutex_unlock(&philosopher->sim->print_mutex);
+	return (get_time_ms() - sim->start_time);
 }
 
 int	ft_atoi(const char *nptr)
