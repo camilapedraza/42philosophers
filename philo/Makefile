@@ -6,7 +6,7 @@
 #    By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/06 16:49:10 by mpedraza          #+#    #+#              #
-#    Updated: 2026/02/09 15:48:15 by mpedraza         ###   ########.fr        #
+#    Updated: 2026/02/10 20:25:20 by mpedraza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ CC 			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 LDFLAGS		=	-pthread
 
-SRCS		=	philosophers.c \
-				routine_tasks.c \
+SRCS		=	main.c \
+				routine.c \
+				monitor.c \
+				print.c \
 				utils.c
 OBJS		= ${SRCS:%.c=%.o}
 HEADERS		= philosophers.h		
