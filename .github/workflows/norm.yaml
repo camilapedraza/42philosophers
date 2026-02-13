@@ -18,12 +18,7 @@ jobs:
 
       - name: Run Norminette
         run: |
-              if [ -d src ]; then
-                  norminette src
-              fi
-              if [ -d include ]; then
-                  norminette include
-              fi
+            norminette
       - name: Check forbidden functions
         run: |
-          if grep -R "printf" src; then exit 1; fi
+          if grep -R "exit("; then exit 1; fi
