@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 18:03:10 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/13 18:04:32 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:27:24 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_args(t_sim *sim, int ac, char **av)
 		sim->required_meals = n;
 	}
 	else
-	sim->required_meals = 0;
+		sim->required_meals = 0;
 	if (!is_valid_sim(sim, ac))
 		return (FAILURE);
 	return (SUCCESS);
