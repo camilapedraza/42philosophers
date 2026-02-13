@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:23 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/13 18:05:04 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:48:12 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,25 @@ typedef struct s_philosopher
 	t_sim			*sim;
 }	t_philo;
 
-/* MONITOR ROUTINE */
-void	*monitor_routine(void *arg);
+/* INITIALIZERS */
+int		init_simulation(t_sim *sim, int ac, char **av);
+
+/* ARGUMENT PARSER MODULE */
+int		parse_args(t_sim *sim, int ac, char **av);
 
 /* PHILOSOPHER ROUTINE */
 void	*philo_routine(void *arg);
+
+/* MONITOR ROUTINE */
+void	*monitor_routine(void *arg);
 
 /* PRINT MODULE */
 void	print_help(void);
 void	print_status(t_philo *philosopher, t_status status);
 
-/* ARGUMENT PARSER MODULE */
-int		parse_args(t_sim *sim, int ac, char **av);
+/* CLEANUP */
+void	cleanup(t_sim *sim, t_philo *philosophers, pthread_t *threads);
+void	cleanup_forks(t_sim *sim, int n);
 
 /* UTILITIES */
 long	to_usec(long time);
