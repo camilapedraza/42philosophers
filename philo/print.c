@@ -6,11 +6,25 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 20:24:14 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/10 21:05:27 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:02:09 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	print_help(void)
+{
+	printf("./philo requires at least 4 arguments (positive integers):\n");
+	printf("- <p> number of Philosophers at the table\n");
+	printf(
+		"- <d> milliseconds between meals (otherwise Death occurs)\n"
+		);
+	printf("- <m> milliseconds Meals should last\n");
+	printf("- <s> milliseconds Sleep should last\n");
+	printf("- <n> optional: number of meals needed so simulation can stop\n");
+	printf("(if no <n>, simulation stops only when a philosopher dies)\n");
+	printf("\n./philo <p> <d> <m> <s> <n>\n");
+}
 
 static char	*status_msg(t_status status)
 {

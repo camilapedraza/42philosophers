@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:21:49 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/10 21:03:17 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:04:44 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	take_forks(t_philo *philosopher)
+static bool	should_sim_stop(t_sim *sim)
+{
+	bool	value;
+
+	pthread_mutex_lock(&sim->stop_mutex);
+	value = sim->stop;
+	pthread_mutex_unlock(&sim->stop_mutex);
+	return (value);
+}
+
+static void	take_forks(t_philo *philosopher)
 {
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
@@ -33,13 +43,13 @@ void	take_forks(t_philo *philosopher)
 	print_status(philosopher, TAKEN_FORK);
 }
 
-void	release_forks(t_philo *philosopher)
+static void	release_forks(t_philo *philosopher)
 {
 	pthread_mutex_unlock(philosopher->fork_left);
 	pthread_mutex_unlock(philosopher->fork_right);
 }
 
-void	eat(t_philo *philosopher)
+static void	eat(t_philo *philosopher)
 {
 	pthread_mutex_lock(&philosopher->meal_mutex);
 	philosopher->last_meal_time = get_time_ms();
@@ -54,13 +64,19 @@ void	*philo_routine(void *arg)
 	t_philo	*philosopher;
 
 	philosopher = (t_philo *)arg;
+	if (philosopher->sim->nb_philos == 1)
+	{
+		print_status(philosopher, TAKEN_FORK);
+		usleep(to_usec(philosopher->sim->time_to_die));
+		return (NULL);
+	}
 	while (!should_sim_stop(philosopher->sim))
 	{
 		take_forks(philosopher);
 		eat(philosopher);
 		release_forks(philosopher);
 		print_status(philosopher, SLEEPING);
-		usleep(200000);
+		usleep(to_usec(philosopher->sim->time_to_sleep));
 		print_status(philosopher, THINKING);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:57 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/10 21:02:34 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:04:23 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,26 @@ int	init_philosophers(t_sim *sim, t_philo **philosophers)
 	return (SUCCESS);
 }
 
-// TODO time_to_eat needs to be dynamic based on parameters
-// TODO time_to_die needs to be dynamic based on parameters
-int	init_simulation(t_sim *sim, int n)
+int	init_simulation(t_sim *sim, int ac, char **av)
 {
 	int	i;
 
-	if (n <= 0)
+	if (!parse_args(sim, ac, av))
 		return (FAILURE);
-	sim->forks = malloc(sizeof(pthread_mutex_t) * n);
+	sim->forks = malloc(sizeof(pthread_mutex_t) * sim->nb_philos);
 	if (!sim->forks)
 		return (FAILURE);
 	sim->start_time = get_time_ms();
-	sim->time_to_eat = 200;
-	sim->time_to_die = 500;
-	sim->nb_philos = n;
 	sim->stop = false;
 	i = 0;
-	while (i < n)
+	while (i < sim->nb_philos)
 		pthread_mutex_init(&sim->forks[i++], NULL);
 	pthread_mutex_init(&sim->stop_mutex, NULL);
 	pthread_mutex_init(&sim->print_mutex, NULL);
 	return (SUCCESS);
 }
 
-// TODO guard clause for ac < 4
+// TODO handle exit for all init failures
 int	main(int ac, char **av)
 {
 	int			i;
@@ -105,9 +100,12 @@ int	main(int ac, char **av)
 	t_sim		sim;
 	pthread_t	monitor;
 
-	if (ac < 2)
+	if (ac < 5)
+	{
+		print_help();
 		return (1);
-	if (!init_simulation(&sim, ft_atoi(av[1])))
+	}
+	if (!init_simulation(&sim, ac, av))
 		exit(EXIT_FAILURE);
 	if (!init_philosophers(&sim, &philosophers))
 		exit(EXIT_FAILURE);

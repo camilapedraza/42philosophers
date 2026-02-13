@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:23 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/10 21:15:17 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:05:04 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-/* FUNCTION RETURN MESSAGES */
+/* RETURN STATUS */
 
 # define FAILURE 0
 # define SUCCESS 1
@@ -38,11 +38,15 @@ typedef enum e_status
 
 typedef struct s_simulation
 {
-	long			start_time;
-	long			time_to_eat;
-	long			time_to_die;
-	bool			stop;
 	int				nb_philos;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	int				required_meals;
+
+	long			start_time;
+
+	bool			stop;
 
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	stop_mutex;
@@ -62,18 +66,18 @@ typedef struct s_philosopher
 	t_sim			*sim;
 }	t_philo;
 
-/* SIMULATION MONITOR */
+/* MONITOR ROUTINE */
 void	*monitor_routine(void *arg);
-bool	should_sim_stop(t_sim *sim);
 
 /* PHILOSOPHER ROUTINE */
 void	*philo_routine(void *arg);
-void	take_forks(t_philo *philosopher);
-void	release_forks(t_philo *philosopher);
-void	eat(t_philo *philosopher);
 
-/*	PRINT MODULE */
+/* PRINT MODULE */
+void	print_help(void);
 void	print_status(t_philo *philosopher, t_status status);
+
+/* ARGUMENT PARSER MODULE */
+int		parse_args(t_sim *sim, int ac, char **av);
 
 /* UTILITIES */
 long	to_usec(long time);
