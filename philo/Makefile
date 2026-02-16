@@ -6,7 +6,7 @@
 #    By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/06 16:49:10 by mpedraza          #+#    #+#              #
-#    Updated: 2026/02/13 19:49:48 by mpedraza         ###   ########.fr        #
+#    Updated: 2026/02/16 17:03:46 by mpedraza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 LDFLAGS		=	-pthread
 
 SRCS		=	cleanup.c \
-				init_simulation.c \
+				init.c \
 				main.c \
 				monitor.c \
 				parse.c \

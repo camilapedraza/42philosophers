@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:23 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/13 19:48:12 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:54:22 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_philosopher
 
 /* INITIALIZERS */
 int		init_simulation(t_sim *sim, int ac, char **av);
+int		init_philosophers(t_sim *sim, t_philo **philosophers);
+int		init_threads(t_sim *sim, t_philo *philos, pthread_t **threads);
 
 /* ARGUMENT PARSER MODULE */
 int		parse_args(t_sim *sim, int ac, char **av);
@@ -83,8 +85,11 @@ void	print_help(void);
 void	print_status(t_philo *philosopher, t_status status);
 
 /* CLEANUP */
-void	cleanup(t_sim *sim, t_philo *philosophers, pthread_t *threads);
-void	cleanup_forks(t_sim *sim, int n);
+void	cleanup(t_sim *sim, t_philo **philosophers, pthread_t **threads);
+void	cleanup_sim(t_sim *sim, int i);
+void	cleanup_forks(t_sim *sim, int i);
+void	cleanup_philosophers(t_philo **philosophers, int i);
+void	cleanup_threads(pthread_t **threads, int i);
 
 /* UTILITIES */
 long	to_usec(long time);

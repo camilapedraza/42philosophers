@@ -6,41 +6,50 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:46:22 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/13 19:52:58 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:54:29 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	cleanup_forks(t_sim *sim, int n)
+void	cleanup_threads(pthread_t **threads, int i)
+{	
+	while (--i >= 0)
+		pthread_join((*threads)[i], NULL);
+	free(*threads);
+	*threads = NULL;
+}
+
+void	cleanup_philosophers(t_philo **philosophers, int i)
 {
-	while (n--)
-		pthread_mutex_destroy(&sim->forks[n]);
+	while (--i >= 0)
+		pthread_mutex_destroy(&(*philosophers)[i].meal_mutex);
+	free(*philosophers);
+	*philosophers = NULL;
+}
+
+void	cleanup_forks(t_sim *sim, int i)
+{
+	while (--i >= 0)
+		pthread_mutex_destroy(&sim->forks[i]);
 	free(sim->forks);
 	sim->forks = NULL;
 }
 
-void	cleanup(t_sim *sim, t_philo *philosophers, pthread_t *threads)
+void	cleanup_sim(t_sim *sim, int i)
 {
-	int	i;
+	pthread_mutex_destroy(&sim->stop_mutex);
+	pthread_mutex_destroy(&sim->print_mutex);
+	if (sim->forks)
+		cleanup_forks(sim, i);
+}
 
-	if (sim && sim->forks)
-	{
-		i = 0;
-		while (i < sim->nb_philos)
-			pthread_mutex_destroy(&sim->forks[i++]);
-		pthread_mutex_destroy(&sim->stop_mutex);
-		pthread_mutex_destroy(&sim->print_mutex);
-		free(sim->forks);
-		sim->forks = NULL;
-	}
-	if (philosophers)
-	{
-		i = 0;
-		while (i < sim->nb_philos)
-			pthread_mutex_destroy(&philosophers[i++].meal_mutex);
-		free(philosophers);
-	}
-	if (threads)
-		free(threads);
+void	cleanup(t_sim *sim, t_philo **philosophers, pthread_t **threads)
+{
+	if (threads && *threads)
+		cleanup_threads(threads, sim->nb_philos);
+	if (philosophers && *philosophers)
+		cleanup_philosophers(philosophers, sim->nb_philos);
+	if (sim)
+		cleanup_sim(sim, sim->nb_philos);
 }

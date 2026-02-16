@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 19:07:07 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/13 18:01:40 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:11:19 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	*monitor_routine(void *arg)
 			return (NULL);
 		if (philosophers_full(sim, philosophers))
 			return (NULL);
-		usleep(500);
 	}
 	return (NULL);
 }
