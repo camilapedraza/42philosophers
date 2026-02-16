@@ -6,14 +6,14 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:46:22 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/16 19:54:29 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:03:04 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 void	cleanup_threads(pthread_t **threads, int i)
-{	
+{
 	while (--i >= 0)
 		pthread_join((*threads)[i], NULL);
 	free(*threads);

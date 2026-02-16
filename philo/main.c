@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:57 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/16 19:54:36 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:03:16 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	if (!init_threads(&sim, philosophers, &threads))
 		return (EXIT_FAILURE);
 	if (pthread_create(&monitor, NULL, monitor_routine, philosophers) != 0)
-	{	
+	{
 		cleanup(&sim, &philosophers, &threads);
 		return (EXIT_FAILURE);
 	}
