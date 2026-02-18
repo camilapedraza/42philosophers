@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 20:24:14 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/13 18:02:09 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:59:14 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ void	print_status(t_philo *philosopher, t_status status)
 {
 	long	timestamp;
 
+	pthread_mutex_lock(&philosopher->sim->print_mutex);
 	pthread_mutex_lock(&philosopher->sim->stop_mutex);
 	if (philosopher->sim->stop && status != DEAD)
 	{
 		pthread_mutex_unlock(&philosopher->sim->stop_mutex);
+		pthread_mutex_unlock(&philosopher->sim->print_mutex);
 		return ;
 	}
-	pthread_mutex_unlock(&philosopher->sim->stop_mutex);
-	pthread_mutex_lock(&philosopher->sim->print_mutex);
 	timestamp = timestamp_ms(philosopher->sim);
 	printf("%ld %d %s\n", timestamp, philosopher->id, status_msg(status));
+	pthread_mutex_unlock(&philosopher->sim->stop_mutex);
 	pthread_mutex_unlock(&philosopher->sim->print_mutex);
 }

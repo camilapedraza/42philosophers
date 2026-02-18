@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:15:14 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/18 16:35:30 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/18 18:37:52 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ long	timestamp_ms(t_sim *sim)
 
 void	precise_sleep(long duration)
 {
-    long	start;
-	
+	long	start;
+
 	start = get_time_ms();
-    while (get_time_ms() - start < duration)
-        usleep(200);
+	while (get_time_ms() - start < duration)
+		usleep(200);
 }
 
 int	ft_atoi(const char *nptr)

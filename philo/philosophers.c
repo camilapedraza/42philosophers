@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:21:49 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/18 17:43:49 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/18 18:18:23 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	*philo_routine(void *arg)
 		return (NULL);
 	}
 	if (philosopher->id % 2 == 0)
-    	precise_sleep(1);
+		precise_sleep(1);
 	while (!should_sim_stop(philosopher->sim))
 	{
 		take_forks(philosopher);
