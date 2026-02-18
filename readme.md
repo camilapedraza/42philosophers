@@ -8,9 +8,9 @@ The **Philosophers** project is a multithreaded simulation of the classic *Dinin
 
 In the simulation:
 
-- Philosophers sit at a round table and alternate between **thinking**, **eating**, and **sleeping**.
+- Philosophers sit at a round table and alternate between **eating**, **sleeping** and **thinking**.
 - Each philosopher needs **two forks** (shared resources protected by mutexes) to eat.
-- If a philosopher does not eat within `the stipulated milliseconds, they **die** and the simulation stops.
+- If a philosopher does not eat within the stipulated milliseconds, they **die** and the simulation stops.
 - Optionally, the simulation also stops once every philosopher has eaten a required number of meals.
 
 This project focuses on preventing:
