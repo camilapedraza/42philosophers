@@ -22,6 +22,7 @@ and ensuring:
 - Correct, readable output
 - Accurate timing (death printed within **10ms** of the actual death moment)
 
+### Implementation Notes
 In this implementation:
 - Fork acquisition uses a deterministic ordering to prevent deadlocks (philosophers always grabbing for the same fork or waiting forever on a fork).
 - Every other philosopher (even ID number) is slightly staggered at start to reduce initial contention (and avoid starvation and death)
@@ -30,6 +31,16 @@ In this implementation:
 - Timing uses `gettimeofday()` (project constraint) with millisecond timestamps.
 - A custom `precise_sleep()` loop avoids accumulated drift from `usleep()` oversleeping.
 - A small thinking delay to desynchronize philosophers (enough to avoid race for resources but not too much as to induce unnecessary death from starvation).
+
+Testing ensured:
+- Correct death detection within the allowed 10ms (best case 0ms, worst case 4ms)
+- Absence of data races with Helgrind
+- Stability under common stress cases:
+  ```bash
+  ./philo 5 800 200 200
+  ./philo 4 310 200 100
+  ./philo 200 203 100 100
+  ```
 
 ## Instructions
 
