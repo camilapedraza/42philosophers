@@ -6,15 +6,9 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:57 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/16 20:03:16 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:50:05 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* memset, printf, malloc, free, write,
-usleep, gettimeofday, pthread_create,
-pthread_detach, pthread_join, pthread_mutex_init,
-pthread_mutex_destroy, pthread_mutex_lock,
-pthread_mutex_unlock */
 
 #include "philosophers.h"
 
