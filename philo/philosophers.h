@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:23 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/16 19:54:22 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/18 16:35:42 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	cleanup_threads(pthread_t **threads, int i);
 long	to_usec(long time);
 long	get_time_ms(void);
 long	timestamp_ms(t_sim *sim);
+void	precise_sleep(long duration);
 int		ft_atoi(const char *nptr);
 
 #endif
