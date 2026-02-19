@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:21:49 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/18 18:18:23 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/19 18:17:46 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	eat(t_philo *philosopher)
 	philosopher->meals_eaten++;
 	pthread_mutex_unlock(&philosopher->meal_mutex);
 	print_status(philosopher, EATING);
-	precise_sleep(philosopher->sim->time_to_sleep);
+	precise_sleep(philosopher->sim->time_to_eat);
 }
 
 void	*philo_routine(void *arg)
