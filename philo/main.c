@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:44:57 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/18 20:50:05 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:43:04 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	t_sim		sim;
 	pthread_t	monitor;
 
-	if (ac < 5)
+	if (ac < 5 || ac > 6)
 	{
 		print_help();
 		return (EXIT_FAILURE);
