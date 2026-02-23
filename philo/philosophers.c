@@ -6,7 +6,7 @@
 /*   By: mpedraza <mpedraza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:21:49 by mpedraza          #+#    #+#             */
-/*   Updated: 2026/02/21 14:41:17 by mpedraza         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:57:34 by mpedraza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,15 @@ void	*philo_routine(void *arg)
 	philosopher = (t_philo *)arg;
 	if (philosopher->sim->nb_philos == 1)
 	{
-		pthread_mutex_lock(philosopher->fork_left);
 		print_status(philosopher, TAKEN_FORK);
 		usleep(to_usec(philosopher->sim->time_to_die));
-		pthread_mutex_unlock(philosopher->fork_left);
 		return (NULL);
 	}
 	if (philosopher->id % 2 == 0)
+	{
+		print_status(philosopher, THINKING);
 		precise_sleep(1);
+	}
 	while (!should_sim_stop(philosopher->sim))
 	{
 		take_forks(philosopher);
